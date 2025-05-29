@@ -1,0 +1,14 @@
+lvis
+transformers==4.25
+cloudpickle
+fvcore
+iopath
+omegaconf
+einops
+scikit-image
+timm
+tensorboard
+pillow==9.3.0
+pycocotools
+addict
+yapf
