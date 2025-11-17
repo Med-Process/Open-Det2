@@ -4,7 +4,6 @@ This is the official code (based on Pytorch framework) for the paper "Open-Det: 
 
 ## Updates
 
-Source Codes: Comming Soon!
 
 ***01/05/2025***
 
