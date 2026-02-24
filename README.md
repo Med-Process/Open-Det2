@@ -108,10 +108,11 @@ Taking Open-Det-Swin-L as an example, you will obtain the results:
 If you find our repo useful for your research, please consider citing our paper:
 
 ```
-@inproceedings{cao2025opendet,
+@inproceedings{cao2025open,
   title={Open-Det: An Efficient Learning Framework for Open-Ended Detection},
-  author={Guiping, Cao and Tao, Wang and Wenjian, Huang and Xiangyuan, Lan and Jianguo, Zhang and Dongmei, Jiang},
+  author={Cao, Guiping and Wang, Tao and Huang, Wenjian and Lan, Xiangyuan and Zhang, Jianguo and Jiang, Dongmei},
   booktitle={International Conference on Machine Learning},
+  pages={6654--6674},
   year={2025},
   organization={PMLR}
 }
