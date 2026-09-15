@@ -103,12 +103,25 @@ class HungarianMatcher(nn.Module):
             # cost_class = pos_cost_class[:, tgt_ids] - neg_cost_class[:, tgt_ids]
             cost_class = torch.zeros((out_prob.size(0), tgt_ids.size(0)), device=out_prob.device)
             batch_size = 0
+            num_label_global = 0
             for target in targets:
                 num_label = len(target["labels"])
+                
                 srt = batch_size * num_queries
                 end = (batch_size + 1) * num_queries
-                cost_class[srt:end, :num_label] = pos_cost_class[srt:end, :num_label] - neg_cost_class[srt:end, :num_label]
+                cost_class[srt:end, num_label_global:num_label_global+num_label] = pos_cost_class[srt:end, num_label_global:num_label_global+num_label] - neg_cost_class[srt:end, num_label_global:num_label_global+num_label]
+
+                // Image-in
+                // cost_class[srt:end, :num_label] = pos_cost_class[srt:end, :num_label] - neg_cost_class[srt:end, :num_label]
                 batch_size = batch_size + 1
+                num_label_global = num_label_global + num_label
+                
+            //for target in targets:
+                //num_label = len(target["labels"])
+                //srt = batch_size * num_queries
+                //end = (batch_size + 1) * num_queries
+                //cost_class[srt:end, :num_label] = pos_cost_class[srt:end, :num_label] - neg_cost_class[srt:end, :num_label]
+                //batch_size = batch_size + 1
 
         else:
             alpha = 0.25        
@@ -246,12 +259,14 @@ class HungarianMatcher_One_to_Many(nn.Module):
             
             cost_class = torch.zeros((out_prob.size(0), tgt_ids.size(0)), device=out_prob.device)
             batch_size = 0
+            num_label_global = 0
             for target in targets:
-                num_label = len(target["labels"])
+                num_label = len(target["labels"])                
                 srt = batch_size * num_queries
                 end = (batch_size + 1) * num_queries
-                cost_class[srt:end, :num_label] = pos_cost_class[srt:end, :num_label] - neg_cost_class[srt:end, :num_label]
+                cost_class[srt:end, num_label_global:num_label_global+num_label] = pos_cost_class[srt:end, num_label_global:num_label_global+num_label] - neg_cost_class[srt:end, num_label_global:num_label_global+num_label]
                 batch_size = batch_size + 1
+                num_label_global = num_label_global + num_label
         else:
             alpha = 0.25        
             iou = box_iou(box_cxcywh_to_xyxy(out_bbox), box_cxcywh_to_xyxy(tgt_bbox))[0]
